@@ -1,0 +1,35 @@
+.locationmap {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    .map {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    .btns {
+        position: absolute;
+        z-index: 400;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        >a {
+            display: inline-block;
+            width: 45%;
+        }
+    }
+    .close_btn {
+        z-index: 401;
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+    .locateBtn {
+        position: absolute !important;
+        top: -50px;
+        width: 100px !important;
+    }
+}

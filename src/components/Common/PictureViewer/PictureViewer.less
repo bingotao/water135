@@ -1,0 +1,27 @@
+.pictureviewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background: black;
+    .closebtn {
+        position: absolute;
+        z-index: 999;
+        top: 10px;
+        right: 10px;
+    }
+    :global {
+        .slider-list {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            >li {
+                top: auto !important
+            }
+        }
+        .slider-decorator-0{
+            position: fixed !important;
+        }
+    }
+}

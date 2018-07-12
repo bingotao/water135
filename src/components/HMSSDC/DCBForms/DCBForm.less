@@ -1,0 +1,101 @@
+@bg-color: #108ee9;
+.dcbform {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    &_header {
+        font-size: 24px;
+        color: black;
+        margin: 10px;
+        border-left: 5px @bg-color solid;
+        padding-left: 10px;
+        text-align: left;
+        height: 40px;
+        line-height: 40px;
+        >span {
+            border: 1px dotted @bg-color;
+            color: @bg-color;
+            font-size: 14px;
+            border-radius: 3px;
+            padding: 3px 10px;
+            margin-left: 10px;
+        }
+        >span {
+            border: 1px dotted @bg-color;
+            color: @bg-color;
+            font-size: 14px;
+            border-radius: 3px;
+            padding: 3px 10px;
+            margin-left: 10px;
+        }
+    }
+    &_body {
+        height: calc(~'100% - 60px - 80px');
+        background: white;
+        box-shadow: 0 0 5px #aaa;
+        overflow: auto;
+    }
+    .small {
+        :global {
+            .ant-radio-button-wrapper {
+                padding: 0 8px;
+            }
+        }
+    }
+    :global {
+        .am-list-extra {
+            flex-basis: 60% !important;
+            color: @bg-color  !important;
+        }
+        .am-input-control {
+            input {
+                text-align: right;
+            }
+        }
+        .am-input-label {
+            color: black;
+            font-size: 14px;
+            width: auto !important;
+        }
+        .am-input-extra {
+            color: @bg-color;
+        }
+        .am-flexbox {
+            .am-flexbox-item {
+                &:first-child {
+                    width: 36%;
+                    text-align: left;
+                    color: black;
+                    font-size: 14px;
+                }
+                &:last-child {
+                    text-align: center;
+                }
+                .ant-radio-button-wrapper-checked {
+                    color: white;
+                    background: @bg-color;
+                }
+            }
+        }
+        .am-accordion-header {
+            color: @bg-color  !important;
+            font-weight: 700;
+            text-align: left;
+        }
+    }
+    &_btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80px;
+        >a {
+            width: 45%;
+            display: inline-block;
+        }
+    }
+    .close_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+}

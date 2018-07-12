@@ -1,0 +1,104 @@
+:global {
+    @bg-color: #108ee9;
+    @header-height: 70px;
+    .ssdcblist {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        &-close {
+            position: absolute !important;
+            top: 10px;
+            right: 10px;
+            color: #888;
+        }
+        &-header {
+            height: @header-height;
+            font-size: 28px;
+            color: black;
+            margin: 10px;
+            padding-left: 10px;
+            text-align: left;
+            border-left: 5px solid @bg-color;
+            line-height: 1.2;
+            >div:last-child {
+                >span {
+                    display: inline-block;
+                    padding: 3px 10px;
+                    font-size: 15px;
+                    color: @bg-color;
+                    border: 1px dotted @bg-color;
+                    border-radius: 3px;
+                    margin-right: 5px;
+                }
+            }
+        }
+        &-body {
+            box-shadow: 0 0 5px 0 #eee;
+            background: white;
+            height: calc(~'100% - @{header-height} - 20px');
+            .am-tabs-default-bar-tab-active {
+                color: white;
+                background-color: @bg-color;
+            }
+            .am-tabs-default-bar-underline {
+                border: 0;
+            }
+            .am-tabs-default-bar-tab:not(first-child) {
+                border-right: 1px solid #eee;
+            }
+            .tab-content {
+                position: relative;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                &-head {
+                    color: white;
+                    background: @bg-color;
+                    font-size: 16px;
+                    height: 40px;
+                    line-height: 40px;
+                }
+                &-body {
+                    height: calc(~"100% - 40px");
+                    overflow: auto;
+                }
+                &-new {
+                    position: absolute !important;
+                    top: 5px;
+                    right: 10px;
+                    width: 60px;
+                }
+                .am-list-content {
+                    display: flex;
+                    height: 44px;
+                    >span {
+                        line-height: 1.8;
+                        >span {
+                            display: inline-block;
+                            height: 30px;
+                            width: 30px;
+                            color: white;
+                            background-color: #ddd;
+                            text-align: center;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                        }
+                    }
+                    >.tab-item-btn {
+                        position: absolute;
+                        right: 10px;
+                    }
+                    .am-button {
+                        display: inline-block;
+                        width: 60px;
+                    }
+                }
+                .none-result {
+                    text-align: center;
+                    color: rgb(252, 151, 151);
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
