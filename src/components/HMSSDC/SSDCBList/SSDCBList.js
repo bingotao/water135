@@ -77,7 +77,7 @@ class SSDCBList extends Component {
     var id = item.id;
 
     if (item && item.id) {
-      Modal.alert("删除", "确定删除该设施？", [
+      Modal.alert("删除", "确定删除该调查表？", [
         {
           text: "取消",
           onPress: () => {},

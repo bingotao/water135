@@ -1,6 +1,13 @@
 import { Component } from "react";
 import { createForm } from "rc-form";
-import { List, InputItem, Button, Modal, Icon } from "antd-mobile";
+import {
+  List,
+  InputItem,
+  TextareaItem,
+  Button,
+  Modal,
+  Icon
+} from "antd-mobile";
 import { toast, userUtils } from "../../../common/commonTools";
 import { GetItem, AddOrModify } from "../../../services/xmxx";
 import LocationMap from "../../Common/LocationMap/LocationMap";
@@ -119,6 +126,12 @@ class XMXXForm extends Component {
           >
             项目编号{" "}
           </InputItem>
+          <TextareaItem
+            title="备注说明"
+            placeholder="备注说明"
+            {...getFieldProps("mark", { initialValue: item["mark"] })}
+            autoHeight
+          />
           <List.Item>
             {item.x ? (
               <span className="ydw">已定位</span>

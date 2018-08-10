@@ -1,6 +1,14 @@
 import { Component } from "react";
 import { createForm } from "rc-form";
-import { List, InputItem, Button, Picker, Modal, Icon } from "antd-mobile";
+import {
+  List,
+  InputItem,
+  TextareaItem,
+  Button,
+  Picker,
+  Modal,
+  Icon
+} from "antd-mobile";
 import { toast, userUtils } from "../../../common/commonTools";
 import hmssxx from "../../../services/hmssxx";
 import { sslx } from "../../HMSSDC/DCBForms/forms";
@@ -181,11 +189,12 @@ class HMSSXXForm extends Component {
           >
             设施编号{" "}
           </InputItem>
-          {CreateUserID ? (
-            <InputItem type="text" disabled={true} value={CreateUserID}>
-              创建人
-            </InputItem>
-          ) : null}
+          <TextareaItem
+            title="备注说明"
+            placeholder="备注说明"
+            {...getFieldProps("mark", { initialValue: item["mark"] })}
+            autoHeight
+          />
           <List.Item>
             {item.x ? (
               <span className="ydw">已定位</span>
@@ -203,6 +212,11 @@ class HMSSXXForm extends Component {
               定位
             </Button>
           </List.Item>
+          {CreateUserID ? (
+            <InputItem type="text" disabled={true} value={CreateUserID}>
+              创建人
+            </InputItem>
+          ) : null}
         </List>
         <div style={{ marginTop: "10px" }}>
           {user && ["admin", "dataadmin"].includes(user.role) ? (

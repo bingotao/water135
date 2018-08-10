@@ -2,6 +2,7 @@ import { Component } from "react";
 import {
   Accordion,
   InputItem,
+  TextareaItem,
   Icon,
   ImagePicker,
   Button,
@@ -86,7 +87,7 @@ function createDCB(cfg) {
               ...this.state.item,
               ...values,
               ...this.item,
-              dcsj: moment(values.dcsj).format('YYYY-MM-DD HH:mm:ss'),
+              dcsj: moment(values.dcsj).format("YYYY-MM-DD HH:mm:ss"),
               hmss_id: hmss_id,
               xm_id: xm_id,
               xczp: null,
@@ -97,12 +98,11 @@ function createDCB(cfg) {
             var obj = {
               entity: JSON.stringify(item),
               table: tb,
-              hasFiles: true,
               ...this.getModifiedFiles()
             };
 
             toast.loading("保存中...");
-            var rt = await Post("dcb", "AddOrModify", obj);
+            var rt = await Post("dcb", "AddOrModify2", obj);
             var er = rt.err ? rt.err.message : rt.data.ErrorMessage;
             if (er) {
               toast.fail(er);
@@ -391,6 +391,14 @@ function createDCB(cfg) {
               </DatePicker>
             </List>
             {this.getFields()}
+            <List>
+              <TextareaItem
+                title="备注"
+                placeholder="备注说明"
+                {...getFieldProps("mark", { initialValue: item["mark"] })}
+                autoHeight
+              />
+            </List>
             {CreateUserID ? (
               <List>
                 <InputItem type="text" disabled={true} value={CreateUserID}>
