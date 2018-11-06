@@ -4,20 +4,18 @@ import {
   InputItem,
   TextareaItem,
   Icon,
-  ImagePicker,
   Button,
   Picker,
   List,
   DatePicker,
-  ActionSheet,
-  Modal,
   Flex
 } from "antd-mobile";
 import { Radio } from "antd";
 import moment from "moment";
 import { createForm } from "rc-form";
-import PictureViewer from "../../Common/PictureViewer/PictureViewer";
-import { toast, compress, userUtils } from "../../../common/commonTools";
+import PicturePicker from "../DCBForms/PicturePicker";
+
+import { toast, userUtils } from "../../../common/commonTools";
 import { Post } from "../../../services/common";
 import st from "./DCBForm.less";
 
@@ -37,7 +35,6 @@ function createDCB(cfg) {
     item = {};
 
     state = {
-      showPictureViewer: false,
       item: {},
       xmxxList: [],
       hmssxxList: [],
@@ -128,6 +125,7 @@ function createDCB(cfg) {
       var rt, er;
       var item = this.state.item;
       var obj = {};
+      let errs = [];
       toast.loading("加载中...");
       if (item.id) {
         rt = await Post("dcb", "GetItem", { id: item.id, table: tb });
@@ -139,6 +137,16 @@ function createDCB(cfg) {
           obj.files = item.xczp
             ? item.xczp.map(e => ({ id: e.id, url: e.picture }))
             : [];
+        } else {
+          errs.push(er);
+        }
+      } else {
+        rt = await Post("dcb", "GetNewGuid", { id: item.id, table: tb });
+        er = rt.err ? rt.err.message : rt.data.ErrorMessage;
+        if (!er) {
+          item.id = rt.data.Data;
+        } else {
+          errs.push(er);
         }
       }
 
@@ -146,6 +154,8 @@ function createDCB(cfg) {
       er = rt.err ? rt.err.message : rt.data.ErrorMessage;
       if (!er) {
         obj.xmxxList = rt.data.Data;
+      } else {
+        errs.push(er);
       }
 
       rt = await Post("hmssxx", "GetList", {
@@ -156,9 +166,12 @@ function createDCB(cfg) {
       er = rt.err ? rt.err.message : rt.data.ErrorMessage;
       if (!er) {
         obj.hmssxxList = rt.data.Data;
+      } else {
+        errs.push(er);
       }
-      if (er) toast.fail(er);
-      else {
+      if (errs && errs.length) {
+        toast.fail(errs[0]);
+      } else {
         this.setState(obj);
         toast.hide();
       }
@@ -168,39 +181,39 @@ function createDCB(cfg) {
       this.props.onCloseClick();
     }
 
-    onChange = (files, type, index) => {
-      //   debugger;
-      // 判断是否是删除图片，如果是删除图片的话，则需要确定删除
-      if (type === "remove") {
-        this.showDeleteConfirm(files, type, index);
-      } else {
-        this.setState({ files: files });
-        // 对新增图片进行压缩
-        let index = files.length - 1;
-        let file = files[index];
-        compress(file.url, e => {
-          this.state.files[index] = { url: e };
-        });
-      }
-    };
+    // onChange = (files, type, index) => {
+    //   //   debugger;
+    //   // 判断是否是删除图片，如果是删除图片的话，则需要确定删除
+    //   if (type === "remove") {
+    //     this.showDeleteConfirm(files, type, index);
+    //   } else {
+    //     this.setState({ files: files });
+    //     // 对新增图片进行压缩
+    //     let index = files.length - 1;
+    //     let file = files[index];
+    //     compress(file.url, e => {
+    //       this.state.files[index] = { url: e };
+    //     });
+    //   }
+    // };
 
-    showDeleteConfirm = (files, type, index) => {
-      const BUTTONS = ["删除", "取消"];
-      ActionSheet.showActionSheetWithOptions(
-        {
-          options: BUTTONS,
-          cancelButtonIndex: BUTTONS.length - 1,
-          destructiveButtonIndex: BUTTONS.length - 2,
-          title: "确定删除该图片？",
-          maskClosable: true
-        },
-        buttonIndex => {
-          if (buttonIndex !== BUTTONS.length - 1) {
-            this.setState({ files: files });
-          }
-        }
-      );
-    };
+    // showDeleteConfirm = (files, type, index) => {
+    //   const BUTTONS = ["删除", "取消"];
+    //   ActionSheet.showActionSheetWithOptions(
+    //     {
+    //       options: BUTTONS,
+    //       cancelButtonIndex: BUTTONS.length - 1,
+    //       destructiveButtonIndex: BUTTONS.length - 2,
+    //       title: "确定删除该图片？",
+    //       maskClosable: true
+    //     },
+    //     buttonIndex => {
+    //       if (buttonIndex !== BUTTONS.length - 1) {
+    //         this.setState({ files: files });
+    //       }
+    //     }
+    //   );
+    // };
 
     getFields() {
       var fieldsGroup = [];
@@ -309,12 +322,6 @@ function createDCB(cfg) {
       return fieldsGroup;
     }
 
-    showPictureViewer(index, files) {
-      this.selectedIndex = index;
-      this.files = files;
-      this.setState({ showPictureViewer: true });
-    }
-
     componentDidMount() {
       this.getInitData();
       userUtils.getCurrentUser(e => {
@@ -325,14 +332,7 @@ function createDCB(cfg) {
     render() {
       var { getFieldProps } = this.props.form;
       var { onCloseClick } = this.props;
-      var {
-        item,
-        xmxxList,
-        hmssxxList,
-        files,
-        showPictureViewer,
-        user
-      } = this.state;
+      var { item, xmxxList, hmssxxList, user } = this.state;
       var { CreateUserID } = item;
 
       return (
@@ -395,6 +395,7 @@ function createDCB(cfg) {
               <TextareaItem
                 title="备注"
                 placeholder="备注说明"
+                style={{ textAlign: "right" }}
                 {...getFieldProps("mark", { initialValue: item["mark"] })}
                 autoHeight
               />
@@ -407,12 +408,7 @@ function createDCB(cfg) {
               </List>
             ) : null}
             {cfg.hasPictures ? (
-              <ImagePicker
-                files={files}
-                onChange={this.onChange.bind(this)}
-                onImageClick={(index, fs) => this.showPictureViewer(index, fs)}
-                multiple={true}
-              />
+              <PicturePicker p_id={item.id} tb_name={tb} />
             ) : null}
           </div>
           <div className={st.dcbform_btns}>
@@ -426,15 +422,6 @@ function createDCB(cfg) {
               取消
             </Button>
           </div>
-          {showPictureViewer ? (
-            <Modal visible={true}>
-              <PictureViewer
-                onCloseClick={e => this.setState({ showPictureViewer: false })}
-                files={this.files}
-                selectedIndex={this.selectedIndex}
-              />
-            </Modal>
-          ) : null}
         </div>
       );
     }

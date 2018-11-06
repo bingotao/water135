@@ -16,5 +16,12 @@ export default {
       { libraryName: "antd", libraryDirectory: "lib", style: "css" },
       "import1"
     ]
-  ]
+  ],
+  proxy: {
+    "/api": {
+      target: "http://localhost:44947",
+      pathRewrite: {'^/api' : ''},
+      changeOrigin: true
+    }
+  }
 };

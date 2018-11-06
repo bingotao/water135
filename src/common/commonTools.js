@@ -27,7 +27,23 @@ export default {
   })()
 };
 
-let compress = (base64, callback, setting = { max: 1920, quality: 0.7 }) => {
+let convertBase64UrlToBlob = urlData => {
+  var arr = urlData.split(","),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+};
+
+let compress = (
+  base64,
+  callback,
+  setting = { max: 1920, quality: 0.7, base64: false }
+) => {
   var img = new Image();
   img.onload = function() {
     // 默认按比例压缩
@@ -58,7 +74,9 @@ let compress = (base64, callback, setting = { max: 1920, quality: 0.7 }) => {
       var base64 = canvas.toDataURL("image/jpeg", quality);
       this.src = base64;
     } else {
-      callback(this.src);
+      callback(
+        setting.base64 ? this.src : convertBase64UrlToBlob(this.src)
+      );
     }
   };
   img.src = base64;
@@ -86,7 +104,7 @@ var userUtils = {
   },
   logout: callback => {
     $.ajax({
-      url:  config.postUrl + "/Login/Logout",
+      url: config.postUrl + "/Login/Logout",
       method: "post",
       dataType: "json",
       crossDomain: true,
@@ -103,7 +121,7 @@ var userUtils = {
       url: config.postUrl + "/Login/Login",
       method: "post",
       dataType: "json",
-      data:{
+      data: {
         id: id,
         password
       },
@@ -114,7 +132,7 @@ var userUtils = {
       success: e => {
         callback(e);
       },
-      error:e=>{
+      error: e => {
         if (errorCallback) errorCallback();
       }
     });
@@ -124,7 +142,7 @@ var userUtils = {
       url: config.postUrl + "/Login/ModifyPassword",
       method: "post",
       dataType: "json",
-      data:{
+      data: {
         id: id,
         password,
         newPassword
@@ -136,7 +154,7 @@ var userUtils = {
       success: e => {
         callback(e);
       },
-      error:e=>{
+      error: e => {
         if (errorCallback) errorCallback();
       }
     });
@@ -145,4 +163,4 @@ var userUtils = {
     user = u;
   }
 };
-export { toast, compress, userUtils };
+export { toast, convertBase64UrlToBlob, compress, userUtils };
