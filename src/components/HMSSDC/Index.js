@@ -4,6 +4,7 @@ import { Icon } from "antd";
 import { Modal } from "antd-mobile";
 import { userUtils, toast } from "../../common/commonTools";
 import moment from "moment";
+import $ from 'jquery';
 import "./Index.less";
 
 Date.prototype.toJSON = function() {
@@ -49,5 +50,10 @@ class Index extends Component {
     );
   }
 }
+
+// window.onresize = e => {
+//   let { clientHeight } = window.document.documentElement;
+//   $("#root").height(clientHeight);
+// };
 
 export default Index;

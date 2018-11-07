@@ -149,7 +149,6 @@ class PicturePicker extends Component {
 
   render() {
     let { pics, showPictureViewer } = this.state;
-    console.log(pics);
     return (
       <div className={st.PicturePicker}>
         <ImagePicker
