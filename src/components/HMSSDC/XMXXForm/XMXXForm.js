@@ -129,6 +129,7 @@ class XMXXForm extends Component {
           <TextareaItem
             title="备注说明"
             placeholder="备注说明"
+            style={{ textAlign: "right" }}
             {...getFieldProps("mark", { initialValue: item["mark"] })}
             autoHeight
           />

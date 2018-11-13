@@ -59,6 +59,7 @@ export default {
                 name: "植草浅沟管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -154,6 +155,7 @@ export default {
                 name: "植草浅沟管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -376,6 +378,7 @@ export default {
                 name: "下凹式绿地管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -484,6 +487,7 @@ export default {
                 name: "下凹式绿地管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -734,6 +738,7 @@ export default {
                 name: "雨水花园管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -855,6 +860,7 @@ export default {
                 name: "雨水花园管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -1103,6 +1109,7 @@ export default {
                 name: "雨水塘管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -1228,6 +1235,7 @@ export default {
                 name: "雨水塘管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -1489,6 +1497,7 @@ export default {
                 name: "绿色屋顶管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -1561,6 +1570,7 @@ export default {
                 name: "绿色屋顶管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -1756,6 +1766,7 @@ export default {
                 name: "水陆缓冲带管护现状",
                 alias: "管护",
                 alias2: "管护现状",
+                hasPictures: true,
                 configs: [
                     {
                         id: "0",
@@ -1851,6 +1862,7 @@ export default {
                 name: "水陆缓冲带管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -2099,6 +2111,7 @@ export default {
                 name: "预处理设施管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -2223,6 +2236,7 @@ export default {
                 name: "雨水口管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -2378,6 +2392,7 @@ export default {
                 name: "透水铺装管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
@@ -2670,6 +2685,7 @@ export default {
                 name: "渗井管护问卷",
                 alias: "问卷",
                 alias2: "问卷调查",
+                hasPictures: true,
                 configs: [
                     {
                         id: "-1",
